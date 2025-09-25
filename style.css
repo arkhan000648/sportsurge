@@ -541,6 +541,27 @@ section h2 {
 }
 
 
+/* keep existing .watch-btn style — this just controls the hidden state */
+.watch-btn.hidden {
+  visibility: hidden;      /* reserves space, prevents layout shift */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+/* Countdown badge shown while button is hidden */
+.countdown {
+  display: inline-block;
+  
+  color: #ffcc00;
+  padding: 6px 12px;
+  border-radius: 50px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 
 
 
