@@ -50,7 +50,7 @@ fetch(apiURL)
         const timeMatch = (event.unix_timestamp || 0) + cutoff > now;
 
         if (keywordMatch && timeMatch) {
-          const linkHref = `https://arkhanrimu.github.io/sportsurgelive/?id=${event.unix_timestamp}_${idx}`;
+          const linkHref = `/StreamPage/?id=${event.unix_timestamp}_${idx}`;
 
           // Build row with countdown span + hidden watch link
           const tr = document.createElement("tr");
@@ -61,7 +61,7 @@ fetch(apiURL)
             <td>${event.match || "-"}</td>
             <td class="watch-cell">
               <span class="countdown">Watch in 10s</span>
-              <a class="watch-btn hidden" target="_blank" rel="nofollow noopener noreferrer" href="${linkHref}">Watch</a>
+              <a class="watch-btn hidden" href="${linkHref}">Watch</a>
             </td>
           `;
 
@@ -73,7 +73,7 @@ fetch(apiURL)
           const linkEl = tr.querySelector("a.watch-btn");
 
           // Start at 10 seconds visible to user
-          let seconds = 10;
+          let seconds = 5;
           countdownEl.textContent = `Watch in ${seconds}s`;
 
           const interval = setInterval(() => {
@@ -104,5 +104,6 @@ fetch(apiURL)
     loadingDiv.innerHTML = `<p style="color:red;">⚠ Error loading matches</p>`;
     console.error(err);
   });
+
 
 
