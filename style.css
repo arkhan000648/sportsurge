@@ -7,7 +7,7 @@ body a{color:var(--accent-primary);text-decoration:none}
 body a:hover{text-decoration:underline}
 main{display:block}
 header{padding:8px 20px;display:flex;justify-content:center}
-.main-header{padding:10px 20px;display:flex;justify-content:center;transition:background-color .3s ease}
+.main-header{background:#000015;padding:10px 20px;display:flex;justify-content:center;transition:background-color .3s ease}
 .main-header.sticky{position:fixed;top:0;width:100%;z-index:1000;background:#000015;box-shadow:0 4px 6px rgba(0,0,0,.5);transform:translateY(-100%);animation:slide-down .4s ease-out forwards}
 @keyframes slide-down{100%{transform:translateY(0)}}
 .nav-menu{list-style:none;display:flex;gap:10px;flex-wrap:nowrap;margin:0;padding:5px 8px;justify-content:center;align-items:center}
@@ -61,13 +61,14 @@ footer p{padding-bottom:30px}
 .article-intro strong{color:var(--text-primary)}
 .section-divider{text-align:center;margin:3rem 0}
 .section-divider h2{display:inline-block;position:relative;font-size:1.8rem;color:var(--white);text-transform:uppercase;letter-spacing:1px}
-.section-divider h2::before,.section-divider h2::after{content:'';position:absolute;top:50%;height:2px;width:50px;background:var(--accent-primary)}
-.section-divider h2::before{left:-65px}
-.section-divider h2::after{right:-65px}
+.section-divider h2::before,.section-divider h2::after{content:'';position:absolute;top:50%;height:2px;width:50px;background:var(--accent-primary);opacity:0;transform:scaleX(0);transition:all .5s ease}
+.section-divider.is-visible h2::before{left:-65px;opacity:1;transform:scaleX(1)}
+.section-divider.is-visible h2::after{right:-65px;opacity:1;transform:scaleX(1)}
 .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:2rem}
 .feature-card{background:#000015;padding:2rem;border-radius:12px;border:1px solid var(--border-color);text-align:center;transition:transform .3s ease,box-shadow .3s ease}
 .feature-card:hover{transform:translateY(-8px);box-shadow:0 10px 25px rgba(0,0,0,.5)}
-.feature-icon{font-size:2.5rem;color:var(--accent-primary);margin-bottom:1rem}
+.feature-icon{font-size:2.5rem;color:var(--accent-primary);margin-bottom:1rem;transition:transform .4s ease}
+.feature-card:hover .feature-icon{transform:scale(1.15) rotate(5deg)}
 .feature-icon svg{width:48px;height:48px;fill:currentColor}
 .feature-card h3{font-size:1.3rem;margin:0 0 .75rem 0;color:var(--white)}
 .feature-card p{margin:0;font-size:.95rem}
@@ -78,11 +79,14 @@ footer p{padding-bottom:30px}
 .styled-checklist li:last-child{margin-bottom:0}
 .article-conclusion{background:#000015;padding:2.5rem;border-radius:16px;text-align:center;border-top:3px solid var(--accent-primary);margin-top:3rem}
 .article-conclusion h3{font-size:1.6rem;margin-top:0;color:var(--accent-primary)}
-.animate-on-scroll{opacity:0;transform:translateY(30px);transition:opacity .6s ease-out,transform .6s ease-out}
+.animate-on-scroll{opacity:0;transform:translateY(40px);transition:opacity .6s ease-out,transform .6s ease-out}
 .animate-on-scroll.is-visible{opacity:1;transform:translateY(0)}
+.feature-card.animate-on-scroll:nth-child(2){transition-delay:.1s}
+.feature-card.animate-on-scroll:nth-child(3){transition-delay:.2s}
+.feature-card.animate-on-scroll:nth-child(4){transition-delay:.3s}
 
 /* ========================================================================= */
-/* ===  4. SEARCH OVERLAY STYLES  ========================================== */
+/* ===  4. SEARCH OVERLAY STYLES (CORRECTED) =============================== */
 /* ========================================================================= */
 .search-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);display:none;justify-content:center;align-items:flex-start;padding-top:60px;z-index:9999;backdrop-filter:blur(4px)}
 .search-overlay.active{display:flex}
@@ -93,17 +97,27 @@ footer p{padding-bottom:30px}
 .close-search-btn:hover{color:var(--white)}
 .search-results-container{overflow-y:auto;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;padding:5px}
 .search-placeholder{text-align:center;color:var(--text-secondary);margin:auto;width:100%}
+.search-placeholder p{margin:0}
+
+/* --- FIXED: ADDED MISSING STYLES FOR SEARCH CARDS --- */
 .search-results-container .match-card{background:var(--bg-secondary);border-radius:.5rem;overflow:hidden;text-decoration:none;color:inherit;position:relative;display:flex;flex-direction:column;transition:transform .2s ease;width:200px}
 .search-results-container .match-card:hover{transform:translateY(-4px)}
 .search-results-container .match-poster{width:100%;object-fit:cover;aspect-ratio:16/10;background-color:#262626;display:block}
 .search-results-container .status-badge{position:absolute;top:10px;left:10px;background:#dc2626;color:var(--white);padding:2px 6px;border-radius:9999px;font-size:12px;font-weight:700;z-index:2}
-.search-results-container .match-info{padding:10px;flex:1}
-.search-results-container .match-title{font-size:15px;font-weight:700;color:var(--text-primary);height:40px;line-height:20px;overflow:hidden}
+.search-results-container .status-badge.live{animation:pulse-red 1.5s infinite}
+.search-results-container .status-badge.date{background:rgba(0,0,0,.7)}
+.search-results-container .popular-badge{position:absolute;top:10px;right:10px;background:#ea580c;color:var(--white);width:26px;height:26px;border-radius:9999px;display:flex;align-items:center;justify-content:center;z-index:2}
+.search-results-container .popular-badge svg{width:16px;height:16px}
+.search-results-container .match-info{padding:10px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.search-results-container .match-title{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--text-primary);height:40px;line-height:20px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .search-results-container .match-meta-row{display:flex;justify-content:space-between;font-size:14px;color:var(--text-secondary)}
+.search-results-container .match-category{text-transform:capitalize}
+@keyframes pulse-red{0%,100%{opacity:1}50%{opacity:.8}}
 
 /* ========================================================================= */
 /* ===  5. RESPONSIVE MEDIA QUERIES  ======================================= */
 /* ========================================================================= */
 @media(max-width:768px){.main-header{padding:8px 10px}.nav-menu{overflow-x:auto;-webkit-overflow-scrolling:touch}.nav-menu li a{font-size:14px;white-space:nowrap}.main-content-title{margin:1rem 0 2rem;font-size:1.4rem}.feature-grid{grid-template-columns:1fr}.nav-discord-btn a{padding:4px 10px;font-size:14px}.categories-grid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem}.category-card{padding:2rem 1rem}}
 @media(max-width:600px){.search-and-schedule-container{flex-direction:column;align-items:stretch}}
+@media(max-width:500px){.search-overlay-content{width:100%;max-width:none}.search-results-container .match-card{width:calc(50% - .5rem)}}
 @media(max-width:480px){.categories-grid{grid-template-columns:1fr 1fr;gap:1rem}.category-card img{max-width:70px;height:70px}.category-card span{font-size:1rem}}
