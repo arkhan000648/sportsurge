@@ -5,10 +5,12 @@ self.addEventListener('fetch', (event) => {
 
 });
 
-
+// Monetag Verification.
 self.options = {
     "domain": "3nbf4.com",
     "zoneId": 10068797
 }
 self.lary = ""
 importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
+
+// Monetag Verification END.
