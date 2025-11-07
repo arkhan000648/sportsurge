@@ -1,5 +1,11 @@
 User-agent: *
+
+Disallow: /SearchResult/
+Disallow: /Matchinformation/
+Disallow: /Watch/
+
 Allow: /
 
 
 Sitemap: https://sportsurge.shop/sitemap.xml
+
