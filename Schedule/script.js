@@ -355,7 +355,7 @@
       currentFilters.source = urlParams.get('source') || 'all';
       const isAllSports = categoryName === 'all';
       const formattedName = isAllSports ? 'All Sports' : categoryName.replace(/-/g, ' ');
-      const pageTitleText = `buffstreams.world ${formattedName.replace(/\b\w/g, l => l.toUpperCase())} Matches`;
+      const pageTitleText = `sportsurge.shop ${formattedName.replace(/\b\w/g, l => l.toUpperCase())} Matches`;
       
       pageTitle.textContent = pageTitleText;
       titleElement.textContent = pageTitleText;
@@ -448,3 +448,4 @@
   fetchAllMatchesForSearch().then(setupSearch);
 
 })();
+
