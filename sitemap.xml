@@ -3,7 +3,7 @@
 
   <url>
     <loc>https://sportsurge.shop/</loc>
-    <lastmod>2025-11-20</lastmod>
+    <lastmod>2025-12-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -11,7 +11,7 @@
   <!-- Main Schedule Page: The most dynamic page, content changes every day. High priority. -->
   <url>
     <loc>https://sportsurge.shop/Schedule/</loc>
-    <lastmod>2025-11-20</lastmod>
+    <lastmod>2025-12-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -167,6 +167,7 @@
   </url>
 
 </urlset>
+
 
 
 
